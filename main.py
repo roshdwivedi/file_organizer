@@ -4,7 +4,7 @@ import shutil
 def get_source_dir():
     source = input("Enter path to the target directory: ")
     if not os.path.isdir(source):
-        print("Error : The given path is not valid, Please try again with valid path")
+        print(f"Error : The given path '{source}' is not valid, Please try again with valid path")
         return None
     else:
         return source
@@ -19,6 +19,10 @@ def file_organize():
     for name in os.listdir(source):
         if os.path.isfile(os.path.join(source,name)):
             file_ext.add(os.path.splitext(name)[1].lower())
+    if len(file_ext) == 0:
+        print("Files are already sorted in the directory!")
+        return
+    
     for ext in file_ext:
         os.makedirs(os.path.join(source,ext.strip('.')),exist_ok=True)
     
